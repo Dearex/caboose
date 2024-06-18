@@ -11,15 +11,15 @@ def check_caboose(numbers) -> None:
         checked += 1
         if sympy.isprime(n*n-n+caboose_check):
             primes += 1
-        if primes/checked < TARGET_RATIO:
+        if primes/checked < TARGET_RATIO and checked > 10:
             return 
-    print(f"{caboose_check} has {primes/checked*100} % Primes")
+    if primes/checked > TARGET_RATIO:
+        print(f"{caboose_check} has {primes/checked*100} % Primes")
 
 print("START", datetime.datetime.now())
 for caboose_check in range(3, 1_000_000_000, 2):
-    if (caboose_check-1) % 100000 == 0:
+    if (caboose_check-1) % 1_000_000 == 0:
         print(f"Currently at {caboose_check}")
     check_caboose(range(1, caboose_check, STEP_SIZE))
 
 print("END", datetime.datetime.now())
-
